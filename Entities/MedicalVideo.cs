@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Healthcare.API.Entities;
+﻿namespace Healthcare.API.Entities;
 
 public partial class MedicalVideo
 {

@@ -16,7 +16,8 @@ public class MedicalVideosController(AppDbContext context, IWebHostEnvironment w
     public async Task<IActionResult> UploadMedicalVideoAsync([FromForm] MedicalVideoModel model)
     {
         var validDepartmentId = _context.Departments.Any(d => d.DepartmentId == model.DepartmentId);
-        if (!validDepartmentId)
+
+        if (!validDepartmentId && model.DepartmentId.HasValue)
             return NotFound($"There is no department with id: ${model.DepartmentId}");
 
         var path = Path.Combine(_webHostEnvironment.WebRootPath, "Videos");

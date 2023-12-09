@@ -1,6 +1,7 @@
 
 using Healthcare.API.Data;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.EntityFrameworkCore;
 
 namespace Healthcare.API;
 
@@ -17,11 +18,12 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<AppDbContext>();
+        builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         builder.Services.Configure<FormOptions>(options =>
         {
-            options.MultipartBodyLengthLimit = long.MaxValue;
+            options.MultipartBodyLengthLimit = 30000000;
             options.MemoryBufferThreshold = int.MaxValue;
         });
 
